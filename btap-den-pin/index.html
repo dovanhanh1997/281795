@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="TurnOn()">On</button>
+<button onclick="TurnOff()">Off</button>
+<p>
+    <label>Flash Lamp</label><br>
+    <span id="view"></span>
+</p>
+<script>
+let Battery = function (battery) {
+    this.ennergry = battery;
+
+    this.getBattery = function () {
+        return this.ennergry;
+    };
+    this.setBattery = function (battery) {
+      this.ennergry = battery;
+    };
+    this.decreaseBattery = function () {
+      if (this.ennergry > 0){this.ennergry--;}
+      else {document.write("Out of Battery") ;}
+    }
+};
+let FlashLamp = function (status,battery) {
+    this.status = status;
+    this.ennergry=battery;
+
+    this.Light = function () {
+        if(this.status){console.log("Flash Lamp is ON");}
+        else {console.log("Flash Lamp is OFF");}
+    };
+
+    this.TurnOn = function () {
+        this.status = true;
+    };
+
+    this.TurnOff = function () {
+        this.status = false;
+    };
+
+    this.getInfoBattery = function () {
+        return this.ennergry;
+    };
+
+    this.setBattery = function (ennergry) {
+        this.ennergry=ennergry;
+    }
+};
+
+let view = document.getElementById("view");
+let battery = new Battery(10);
+let ennergry = battery.ennergry;
+let flashlamp = new FlashLamp(false,ennergry);
+
+let TurnOn=function () {
+    view.innerHTML =("Turn On <br>");
+    flashlamp.TurnOn();
+    flashlamp.Light();
+    view.innerHTML += ("Battery: " + flashlamp.getInfoBattery() + "<br>");
+    battery.decreaseBattery();
+    ennergry = battery.ennergry;
+    flashlamp.setBattery(ennergry);
+};
+
+let TurnOff=function () {
+    view.innerHTML =("Turn Off <br>");
+    flashlamp.TurnOff();
+    flashlamp.Light();
+    view.innerHTML += ("Battery: " + flashlamp.getInfoBattery() + "<br>");
+}
+
+
+
+</script>
+</body>
+</html>
